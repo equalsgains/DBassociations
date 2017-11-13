@@ -1,25 +1,9 @@
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/blog_demo_2");
 
-// POST
-var postSchema = new mongoose.Schema({
-  title: String,
-  content: String
-});
-var Post = mongoose.model("Post", postSchema);
+var Post = require("./models/post");
+var User = require("./models/user");
 
-// USER - email, name
-var userSchema = new mongoose.Schema({
-  email: String,
-  name: String,
-  posts: [
-      {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Post"
-      }
-  ]
-});
-var User = mongoose.model("User", userSchema);
 
 // User.create({
 //     email: "bob@gmail.com",
@@ -53,13 +37,13 @@ var User = mongoose.model("User", userSchema);
 // });
 
 // FIND USER
-User.findOne({email: "bob@gmail.com"}).populate("posts").exec(function(err, user){
-    if (err) {
-        console.log("error");
-    } else {
-        console.log(user);
-    }
-});
+// User.findOne({email: "bob@gmail.com"}).populate("posts").exec(function(err, user){
+//     if (err) {
+//         console.log("error");
+//     } else {
+//         console.log(user);
+//     }
+// });
 // FIND ALL POSTS FOR THAT USER
 
 
